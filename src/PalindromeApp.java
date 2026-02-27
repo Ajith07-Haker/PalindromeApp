@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 class PalindromeApp{
     public static void main(String[] args) {
@@ -9,14 +10,26 @@ class PalindromeApp{
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        String reversed = "";
 
-// Iterate from last character to first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+// Create a Stack to store characters
+        Stack<Character> stack = new Stack<>();
+
+// Push each character into stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        if (input.equals(reversed)) {
+        boolean isPalindrome = true;
+
+// Compare original string with stack (reverse order)
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
             System.out.println("Is it a Palindrome? : true");
         } else {
             System.out.println("Is it a Palindrome? : false");
